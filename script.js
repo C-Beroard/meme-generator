@@ -2,16 +2,29 @@
  * TODO: Implement a function that clears all the content
  * prior to generating new random content
  */
-function clearAll() {}
+function clearAll() {
+const memeContainer = document.querySelector('.meme-content');
+const jokeContainer = document.querySelector('.joke-content');
+const quoteContainer = document.querySelector('.quote-content');
+const riddleContainer = document.querySelector('.riddle-content');
 
-/**
- * TODO:
- * - Show a random Meme in the correct location
- * - Never show more than 1 meme at a time
- */
+memeContainer.innerHTML = '';
+jokeContainer.innerHTML = '';
+quoteContainer.innerHTML = '';
+riddleContainer.innerHTML = '';
+}
+
+
+
 function showMeme() {
-  // Value is a string representing image URL
   const randomMemeUrl = getRandomData("memes");
+  const container = document.querySelector('.meme-content');
+  const newImg = document.createElement('img');
+  newImg.setAttribute('src',randomMemeUrl);
+  
+ clearAll();
+
+ container.appendChild(newImg);
 }
 
 /**
