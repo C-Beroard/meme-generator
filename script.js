@@ -27,80 +27,84 @@ function showMeme() {
  container.appendChild(newImg);
 }
 
-/**
- * TODO:
- * - Show a random joke in the correct location
- * - Never show more than 1 joke at a time
- */
+
 function showJoke() {
-  // Value is a string representing the joke
-  const randomJokeText = getRandomData("jokes");
+
+const randomJokeText = getRandomData("jokes");
+
+const newP = document.createElement('p');
+newP.textContent = randomJokeText;
+
+clearAll();
+
+document.querySelector('.joke-content').appendChild(newP);
+
 }
 
-/**
- * TODO:
- * - Show a random quote in the correct location
- * - Never show more than 1 quote at a time
- */
+
 function showQuote() {
-  // Value should be in format: { quote: '', author: '' }
+
   const randomQuote = getRandomData("quotes");
+
+  const quote = document.createElement('p');
+  const author = document.createElement('p');
+  quote.textContent  = randomQuote.quote;
+  author.textContent = "- " + randomQuote.author;
+
+  clearAll();
+
+  const container = document.querySelector('.quote-content')
+
+  container.appendChild(quote);
+  container.appendChild(author);
 }
 
-/**
- * TODO:
- * - Show a random riddle in the correct location
- * - Never show more than 1 riddle at a time
- * - Always hide the riddle's answer initially
- */
+
 function showRiddle() {
-  // Value should be in format: { question: '', answer: '' }
+ 
   const randomRiddle = getRandomData("riddles");
+
+  const {question, answer} = randomRiddle
+
+  const questionP = document.createElement('p');
+  questionP.textContent = question;
+
+  const container = document.querySelector('.riddle-content')
+
+  const answerP = document.createElement('p');
+  answerP.textContent = answer;
+  answerP.setAttribute('id', 'riddle-answer');
+  answerP.hidden = true; 
+  
+
+clearAll();
+
+  container.appendChild(questionP);
+  container.appendChild(answerP);
+
 }
 
-/**
- * TODO: Unhide the riddle's answer
- * - If there is no riddle shown, alert the user that there is no riddle
- * - If there is a riddle shown and an answer shown, alert the user
- *   that the answer is already revealed
- * - If there is a riddle shown but no answer, unhide the answer!
- */
-function revealAnswers() {}
 
-/**
- * This function is used to get random data.  Don't worry about how it works, just know how to use it.  Usage is pre-filled in the functions above already, but here's an explanation of the function anyways.
- *
- * Valid arguments:
- *
- * 'memes', 'jokes', 'quotes', 'riddles'
- *
- * Return values:
- *
- * For meme data:
- * A string representing an image url
- *
- * For joke data:
- * A string representing the joke
- *
- * For quote data:
- * An object - { quote: '', author: '' }
- *
- * For riddle data:
- * An object - { question: '', answer: '' }
- *
- * Example usage: getRandomData('quotes');
- */
+function revealAnswers() {
+  const riddleContainer = document.querySelector('.riddle-content');
+  const riddle = riddleContainer.querySelector('p'); 
+  const answer = document.querySelector('#riddle-answer');
+
+  if (riddle && answer.hidden) {
+    answer.hidden = false;
+    } else if (riddle) {
+      alert('the answer is already revealed!')
+  } else {
+    alert('There is no riddle to reveal the answer to!')
+  }
+
+}
+
+
 function getRandomData(type) {
   return data[type][rn(data[type].length)];
 }
 
-// ----------------------------------------------------
-// NO NEED TO CHANGE ANYTHING BELOW but...
-// feel free to add/remove items from these lists to customize
-// your results
-// ----------------------------------------------------
-
-// Source: https://www.thecoderpedia.com/blog/programming-memes/, Reddit
 const memes = [
   "https://i.redd.it/a0v87gwzoge61.jpg",
   "https://i.redd.it/q29egav34ee61.jpg",
@@ -117,7 +121,7 @@ const memes = [
   "https://www.thecoderpedia.com/wp-content/uploads/2020/06/Internet-Explorer-Joke-915x1024.jpg",
 ];
 
-// Sourced from: http://www.devtopics.com/best-programming-jokes/
+
 const jokes = [
   "This statement",
   "Eight bytes walk into a bar.  The bartender asks, “Can I get you anything?” “Yeah,” reply the bytes.  “Make us a double.”",
@@ -131,7 +135,6 @@ const jokes = [
   "The best thing about a Boolean is even if you are wrong, you are only off by a bit.",
 ];
 
-// source: https://www.goodreads.com/quotes/tag/programming
 const quotes = [
   {
     quote:
@@ -194,7 +197,7 @@ const quotes = [
   },
 ];
 
-// Source: https://www.rd.com/list/challenging-riddles/
+
 const riddles = [
   {
     question:
@@ -228,7 +231,7 @@ const riddles = [
   },
 ];
 
-// Just a little helper function
+
 function rn(len) {
   return Math.floor(Math.random() * len);
 }
