@@ -1,7 +1,4 @@
-/**
- * TODO: Implement a function that clears all the content
- * prior to generating new random content
- */
+
 function clearAll() {
 const memeContainer = document.querySelector('.meme-content');
 const jokeContainer = document.querySelector('.joke-content');
@@ -14,8 +11,6 @@ quoteContainer.innerHTML = '';
 riddleContainer.innerHTML = '';
 }
 
-
-
 function showMeme() {
   const randomMemeUrl = getRandomData("memes");
   const container = document.querySelector('.meme-content');
@@ -26,7 +21,6 @@ function showMeme() {
 
  container.appendChild(newImg);
 }
-
 
 function showJoke() {
 
@@ -40,7 +34,6 @@ clearAll();
 document.querySelector('.joke-content').appendChild(newP);
 
 }
-
 
 function showQuote() {
 
@@ -59,7 +52,6 @@ function showQuote() {
   container.appendChild(author);
 }
 
-
 function showRiddle() {
  
   const randomRiddle = getRandomData("riddles");
@@ -76,14 +68,12 @@ function showRiddle() {
   answerP.setAttribute('id', 'riddle-answer');
   answerP.hidden = true; 
   
-
 clearAll();
 
   container.appendChild(questionP);
   container.appendChild(answerP);
 
 }
-
 
 function revealAnswers() {
   const riddleContainer = document.querySelector('.riddle-content');
@@ -99,7 +89,6 @@ function revealAnswers() {
   }
 
 }
-
 
 function getRandomData(type) {
   return data[type][rn(data[type].length)];
@@ -120,7 +109,6 @@ const memes = [
   "https://www.thecoderpedia.com/wp-content/uploads/2020/06/Coding-Meme-Code-Comments-be-Like-925x1024.jpg",
   "https://www.thecoderpedia.com/wp-content/uploads/2020/06/Internet-Explorer-Joke-915x1024.jpg",
 ];
-
 
 const jokes = [
   "This statement",
@@ -197,7 +185,6 @@ const quotes = [
   },
 ];
 
-
 const riddles = [
   {
     question:
@@ -230,7 +217,6 @@ const riddles = [
     answer: "Heroine",
   },
 ];
-
 
 function rn(len) {
   return Math.floor(Math.random() * len);
